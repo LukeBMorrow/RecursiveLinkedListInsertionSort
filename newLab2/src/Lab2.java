@@ -92,7 +92,11 @@ class LinkedList {
     //          to put it into ascending order.
     public void insertionSort() {
 
+        Node curr = top;
+        while(curr.getNext()!=null)
+        {
 
+        }
 
 
 
