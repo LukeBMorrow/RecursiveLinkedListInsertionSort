@@ -92,23 +92,42 @@ class LinkedList {
     //          to put it into ascending order.
     public void insertionSort() {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // ****** YOUR CODE GOES HERE ******
-        // ****** (you can add private helper methods, too) *******
-
+         Node head = null;
+         Node current = top;
+         while(current!=null)
+         {
+             head = sort(current, head);
+             current = current.getNext();
+         }
+         top = head;
     } // end insertionSort
+
+    /*Helper method*/
+    private Node sort(Node newNode, Node head)
+    {
+        Node sorted = head;
+        while(sorted!=null && newNode.getItem()>sorted.getItem() && sorted.getNext()!=null)
+        {
+            sorted = sorted.getNext();
+        }
+        if(sorted==null)//IF THE LIST IS EMPTY
+        {
+            head = new Node(newNode.getItem(),null);
+        }
+        else if(sorted==head)//START OF LIST
+        {
+            head = new Node(newNode.getItem(), sorted.getNext());
+        }
+        else if(sorted.getNext()==null)//END OF LIST
+        {
+            sorted.setNext(new Node(newNode.getItem(),null));
+        }
+        else//NORMAL CASE
+        {
+            sorted.setNext(new Node(newNode.getItem(),sorted.getNext()));
+        }
+        return head;
+    }
 
     // isSorted:
     //
@@ -123,35 +142,34 @@ class LinkedList {
         while(curr.getNext() != null && sorted)
         {
             if(curr.getItem()<=prevValue)
-            {
-                sorted = false;
-            }
+            { sorted = false; }
+
             else
             {
                 prevValue = curr.getItem();
                 curr = curr.getNext();
             }
         }
-
+        return sorted;
     } // end isSorted
 
 
-
+//the recursive version of the checking if sorted
     //BONUS CODE
-    public boolean recIsSorted()
-    {
-        return recIsSorted(top);
-    }
-
-    public boolean recIsSorted(Node curr)
-    {
-        if(curr.getItem()>((curr.getNext()).getItem()))
-            return false;
-        else if (curr.getNext()==null)
-            return true;
-        else
-            return recIsSorted(curr.getNext());
-    }
+//    public boolean recIsSorted()
+//    {
+//        return recIsSorted(top);
+//    }
+//
+//    public boolean recIsSorted(Node curr)
+//    {
+//        if(curr.getItem()>((curr.getNext()).getItem()))
+//            return false;
+//        else if (curr.getNext()==null)
+//            return true;
+//        else
+//            return recIsSorted(curr.getNext());
+//
 } // end class LinkedList
 
 
